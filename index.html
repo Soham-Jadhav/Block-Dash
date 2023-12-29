@@ -109,17 +109,6 @@
 
                 this.position.x += this.velocity.x;
                 this.position.z += this.velocity.z;
-
-                // // Detect collusion along the x, y & z axis
-                // const xCollusion = this.right >= ground.left && this.left <= ground.right;
-                // const zCollusion = this.back <= ground.front && this.front >= ground.back;
-                // const yCollusion = this.bottom <= ground.top && this.top >= ground.bottom;
-                // if (
-                //     xCollusion && zCollusion
-                // ) {
-                //     console.log("collusion");
-                // }
-
                 this.applyGravity(ground);
             }
 
@@ -133,7 +122,6 @@
                 })) {
                     this.velocity.y *= 0.6;
                     this.velocity.y = -this.velocity.y;
-                    // this.velocity.y = 0;
                 }
                 else {
                     this.position.y += this.velocity.y;
@@ -178,7 +166,6 @@
             },
         });
         ground.receiveShadow = true;
-        // ground.position.y = -2;
         scene.add(ground);
 
         const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -187,10 +174,6 @@
         light.castShadow = true;
         scene.add(light);
         scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-
-        // camera.position.z = 5;
-        // camera.position.y = 2;
-        // camera.rotation.x = -0.6;
 
         let enemies = [];
 
@@ -217,16 +200,8 @@
         let animationId;
 
         function animate() {
-            // console.log(cube.position.y);
             animationId = requestAnimationFrame(animate);
             renderer.render(scene, camera);
-
-            // cube.rotation.x += 0.01;
-            // cube.rotation.y += 0.01;
-
-            // if(keys.space.pressed){
-            //     cube.velocity.y = 0.2;
-            // }
 
             cube.velocity.x = 0;
             if (keys.a.pressed) {
@@ -255,7 +230,6 @@
                 cancelAnimationFrame(animationId);
             }
 
-            // cube.position.y += -0.01;
             cube.update(ground);
 
             for (let i = enemies.length - 1; i >= 0; i--) {
@@ -333,7 +307,6 @@
 
                 case 'KeyA':
                     keys.a.pressed = true;
-                    // cube.velocity.x = -0.01;
 
                     break;
 
@@ -344,7 +317,6 @@
 
                 case 'KeyD':
                     keys.d.pressed = true;
-                    // cube.velocity.x = 0.01;
 
                     break;
 
@@ -356,7 +328,6 @@
                         zCollusion &&
                         cube.position.y - cube.height / 2 - 0.5 <= ground.position.y + ground.height / 2
                     ) {
-                        // console.log('jump');
                         keys.space.pressed = true;
                         cube.velocity.y = 0.33;
                     }
@@ -377,7 +348,6 @@
 
                 case 'KeyA':
                     keys.a.pressed = false;
-                    // cube.velocity.x = -0.01;
 
                     break;
 
@@ -388,13 +358,11 @@
 
                 case 'KeyD':
                     keys.d.pressed = false;
-                    // cube.velocity.x = 0.01;
 
                     break;
 
                 case 'Space':
                     keys.space.pressed = false;
-                    // cube.velocity.x = 0.01;
 
                     break;
 
